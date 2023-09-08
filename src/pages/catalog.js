@@ -123,7 +123,7 @@ export default function Catalog() {
 
   const jobEditHandler = jobId => {
     const jobToEdit = jobPostings.find(job => job.id === jobId);
-    console.log(jobToEdit);
+
     setEditJobId(jobId);
     setTitle(jobToEdit.title);
     setDescription(jobToEdit.description);
