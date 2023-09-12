@@ -13,16 +13,19 @@ export default function Applications() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
-    return async () => {
-      const response = await fetch(
-        `https://codev-job-board-app.azurewebsites.net/api/JobApplicant/getjobsapplied/${currentUser.userId}`
-      );
-      const applications = await response.json();
-      setJobApplications(applications);
-      dispatch(authActions.replaceAppliedJobs(applications));
-      setIsLoading(false);
-    };
+    if (currentUser) {
+      setIsLoading(true);
+
+      return async () => {
+        const response = await fetch(
+          `https://codev-job-board-app.azurewebsites.net/api/JobApplicant/getjobsapplied/${currentUser.userId}`
+        );
+        const applications = await response.json();
+        setJobApplications(applications);
+        dispatch(authActions.replaceAppliedJobs(applications));
+        setIsLoading(false);
+      };
+    }
   }, []);
 
   return (
